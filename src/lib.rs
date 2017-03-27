@@ -1,5 +1,19 @@
-use std::cmp::Ordering;
+//! strutil contains common string functions
 
+use std::cmp::{Ordering, min};
+use std::collections::HashMap;
+
+/// Determines if the provided string is a palindrome.
+///
+/// # Examples
+///
+/// ```
+/// extern crate strutil;
+///
+/// let s = "racecar";
+///
+/// assert_eq!(true, strutil::is_palindrome(&s))
+/// ```
 pub fn is_palindrome(s: &str) -> bool {
 
     let res = s.chars().cmp(s.chars().rev());
@@ -7,29 +21,56 @@ pub fn is_palindrome(s: &str) -> bool {
     res == Ordering::Equal
 }
 
-// pub fn is_palindrome(s: &str) -> bool {
+/// Determines if the provided string is an anagram of the supplied subject.
+///
+/// # Rules
+///
+/// - strings are of same length
+/// - an exact character mapping between strings, lowercased and special characters counted.
+///
+/// # Examples
+///
+/// ```
+/// extern crate strutil;
+///
+/// let subject = "Eleven plus two";
+/// let anagram = "Twelve plus one";
+///
+/// assert_eq!(true, strutil::is_anagram(&subject, &anagram))
+/// ```
+pub fn is_anagram(subject: &str, string: &str) -> bool {
 
-//     let half = s.chars().count() / 2;
+    if subject.len() != string.len() || subject == string {
+        return false;
+    }
 
-//     return s.chars().take(half).eq(s.chars().rev().take(half));
-// }
+    let mut m: HashMap<char, u64> = HashMap::with_capacity(min(subject.len(), 26)); // 26 letters in alphabet
 
-// use std::string::ToString;
+    for c in subject.chars().map(|c| c.to_lowercase().next().unwrap()) {
+        let count = m.entry(c).or_insert(0);
+        *count += 1;
+    }
 
-// pub fn is_palindrome<T: ToString>(val: T) -> bool {
+    let mut remove: bool;
 
-//     let s = val.to_string();
-//     let half = s.chars().count() / 2;
+    for c in string.chars().map(|c| c.to_lowercase().next().unwrap()) {
 
-//     s.chars().take(half).eq(s.chars().rev().take(half))
-// }
+        match m.get_mut(&c) {
+            Some(x) => {
+                if *x == 1 {
+                    remove = true;
+                } else {
+                    *x -= 1;
+                    remove = false;
+                }
+            }
+            None => return false,
+        }
 
-// use std::fmt::Display;
+        if remove {
+            m.remove(&c);
+        }
+    }
 
-// pub fn is_palindrome<T: Display>(val: T) -> bool {
-
-//     let s = format!("{}", val);
-//     let half = s.chars().count() / 2;
-
-//     s.chars().take(half).eq(s.chars().rev().take(half))
-// }
+    m.is_empty()
+}
