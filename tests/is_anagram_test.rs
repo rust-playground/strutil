@@ -12,4 +12,5 @@ fn test_is_anagram() {
     assert_eq!(true, strutil::is_anagram("A gentleman", "Elegant man"));
     assert_eq!(true,
                strutil::is_anagram("♥☺♥☺♥☺♥", "♥♥♥♥☺☺☺"));
+    assert_eq!(false, strutil::is_anagram("racecar", "racebar"));
 }
