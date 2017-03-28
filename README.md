@@ -1,7 +1,7 @@
 strutil
 =========
 [![Build Status](https://travis-ci.org/rust-playground/strutil.svg?branch=master)](https://travis-ci.org/rust-playground/strutil)
-![Docs](https://img.shields.io/badge/docs-reference-blue.svg)
+[![Docs](https://img.shields.io/badge/docs-reference-blue.svg)](https://rust-playground.github.io/strutil/strutil/index.html)
 ![License](https://img.shields.io/dub/l/vibe-d.svg)
 
 utility package for common string operations ( helping me to learn Rust comparing to Go ) https://github.com/go-experimental/strutil
