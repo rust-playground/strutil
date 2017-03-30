@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["is_anagram","Determines if the provided string is an anagram of the supplied subject."],["is_palindrome","Determines if the provided string is a palindrome."]]});
