@@ -7,20 +7,28 @@ use test::Bencher;
 
 #[bench]
 fn bench_is_palindrome_multibyte(b: &mut Bencher) {
-    b.iter(|| strutil::is_palindrome("♥☺♥☺♥☺♥"));
+    let s = "♥☺♥☺♥☺♥";
+    b.bytes = s.bytes().count() as u64;
+    b.iter(|| strutil::is_palindrome(s));
 }
 
 #[bench]
 fn bench_is_palindrome_small(b: &mut Bencher) {
-    b.iter(|| strutil::is_palindrome("racecar"));
+    let s = "racecar";
+    b.bytes = s.bytes().count() as u64;
+    b.iter(|| strutil::is_palindrome(s));
 }
 
 #[bench]
 fn bench_is_palindrome_mid(b: &mut Bencher) {
-    b.iter(|| strutil::is_palindrome("tattarrattat"));
+    let s = "tattarrattat";
+    b.bytes = s.bytes().count() as u64;
+    b.iter(|| strutil::is_palindrome(s));
 }
 
 #[bench]
 fn bench_is_palindrome_large(b: &mut Bencher) {
-    b.iter(|| strutil::is_palindrome("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
+    let s = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+    b.bytes = s.bytes().count() as u64;
+    b.iter(|| strutil::is_palindrome(s));
 }

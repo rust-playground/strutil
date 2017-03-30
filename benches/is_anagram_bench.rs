@@ -7,20 +7,32 @@ use test::Bencher;
 
 #[bench]
 fn bench_is_anagram_multibyte(b: &mut Bencher) {
-    b.iter(|| strutil::is_anagram("♥☺♥☺♥☺♥", "♥♥♥♥☺☺☺"));
+    let s1 = "♥☺♥☺♥☺♥";
+    let s2 = "♥♥♥♥☺☺☺";
+    b.bytes = (s1.bytes().count() + s2.bytes().count()) as u64;
+    b.iter(|| strutil::is_anagram(s1, s2));
 }
 
 #[bench]
 fn bench_is_anagram_small(b: &mut Bencher) {
-    b.iter(|| strutil::is_anagram("Race car", "Car race"));
+    let s1 = "Race car";
+    let s2 = "Car race";
+    b.bytes = (s1.bytes().count() + s2.bytes().count()) as u64;
+    b.iter(|| strutil::is_anagram(s1, s2));
 }
 
 #[bench]
 fn bench_is_anagram_mid(b: &mut Bencher) {
-    b.iter(|| strutil::is_anagram("A gentleman", "Elegant man"));
+    let s1 = "A gentleman";
+    let s2 = "Elegant man";
+    b.bytes = (s1.bytes().count() + s2.bytes().count()) as u64;
+    b.iter(|| strutil::is_anagram(s1, s2));
 }
 
 #[bench]
 fn bench_is_anagram_large(b: &mut Bencher) {
-    b.iter(|| strutil::is_anagram("Eleven plus two", "Twelve plus one"));
+    let s1 = "Eleven plus two";
+    let s2 = "Twelve plus one";
+    b.bytes = (s1.bytes().count() + s2.bytes().count()) as u64;
+    b.iter(|| strutil::is_anagram(s1, s2));
 }
